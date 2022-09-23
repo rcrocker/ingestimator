@@ -3,6 +3,7 @@ import About from './About'
 
 import ApplicationTable from './ApplicationTable'
 import MetricsTable from './MetricsTable'
+import OtherEventsTable from "./OtherEventsTable";
 
 export default function Details({ accountId, since }) {
   return <NerdletStateContext.Consumer>
@@ -17,6 +18,9 @@ export default function Details({ accountId, since }) {
         </TabsItem>
         <TabsItem label="Metrics" value="metrics">
           <MetricsTable accountId={accountId} since={since} />
+        </TabsItem>
+        <TabsItem label="Other Events" value="otherEvents">
+          <OtherEventsTable accountId={accountId} since={since} />
         </TabsItem>
       </Tabs>
     }}

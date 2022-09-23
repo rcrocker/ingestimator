@@ -8,7 +8,7 @@ const LIMIT = 40
 
 
 export default function MetricsTableLoader({ accountId, since }) {
-  const query = `SELECT ${ESTIMATED_INGEST_GB}, cardinality() FROM ${METRIC_EVENTS} SINCE ${since} FACET metricName RAW LIMIT ${LIMIT}`
+  const query = `SELECT ${ESTIMATED_INGEST_GB}, cardinality() FROM ${METRIC_EVENTS} SINCE ${since} WHERE metricName not like 'newrelic.goldenmetrics.%' FACET metricName RAW LIMIT ${LIMIT}`
   return <NrqlQuery accountId={accountId} query={query} formatType="raw">
     {({ loading, data }) => {
       if (loading || !data) return <Spinner />
