@@ -1,5 +1,5 @@
 import { NrqlQuery } from 'nr1'
-import { ESTIMATED_INGEST_GB } from './constants'
+import {ESTIMATED_INGEST_GB, STANDARD_RATE_CENTS_PER_GB} from './constants'
 
 export async function getValue({ select, from, where, accountId, since }) {
   select = select || ESTIMATED_INGEST_GB
@@ -40,7 +40,7 @@ export function estimatedCost(value, hostCount) {
   if (hostCount && hostCount > 0) {
     value = value / hostCount
   }
-  const cost = Math.round(value * 25) / 100
+  const cost = Math.round(value * STANDARD_RATE_CENTS_PER_GB) / 100
   const dollars = cost.toLocaleString("en-US", { style: "currency", currency: "USD" });
 
   return `${dollars} ${suffix}`
